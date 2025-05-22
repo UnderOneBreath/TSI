@@ -9,6 +9,24 @@ app.use(cors());
 app.use(bodyParser.json());
 
 let users = [];
+let dataStore = [];
+
+
+//Метод GET
+app.get("/data", (req, res) => {
+  res.json(dataStore);
+});
+
+app.get("/users", (req, res) => {
+  res.json(users);
+});
+
+// Обработка POST-запросов
+app.post('/data', (req, res) => {
+  const newData = req.body;
+  dataStore.push(newData); // Сохраняем данные в массив
+  res.status(201).json(newData); // Отправляем ответ с новыми данными
+});
 
 // Регистрация
 app.post('/register', (req, res) => {

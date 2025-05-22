@@ -53,7 +53,7 @@ const Login: React.FC = () => {
         {error && (
           <div style={{ color: '#d32f2f', marginBottom: 8, fontSize: 14 }}>{error}</div>
         )}
-        <Button size="medium" color="primary" title="Войти" onClick={() => {}} />
+        <Button size="medium" color="primary" title="Войти" type="submit" />
       </form>
     </div>
   );

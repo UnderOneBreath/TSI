@@ -10,8 +10,17 @@ interface Item {
     price: string;
 }
 
+interface User {
+    email: string;
+    name: string;
+    surname: string;
+    phone: string;
+    role: string;
+}
+
 const Message: React.FC = () => {
     const [data, setData] = useState<Item[]>([]);
+    const [users, setUsers] = useState<User[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -22,8 +31,16 @@ const Message: React.FC = () => {
                 console.error("Error fetching data: ", error);
             }
         };
-
+        const fetchUsers = async () => {
+            try {
+                const response = await axios.get("http://localhost:5000/users");
+                setUsers(response.data);
+            } catch (error) {
+                console.error("Error fetching users: ", error);
+            }
+        };
         fetchData();
+        fetchUsers();
     }, []);
 
     return (
@@ -48,6 +65,20 @@ const Message: React.FC = () => {
                         </ul>
                     ) : (
                         <Text size="medium">Нет данных</Text>
+                    )}
+                    <Text size="large" style={{marginTop: 24}}>Пользователи:</Text>
+                    {users.length > 0 ? (
+                        <ul className="space-y-2">
+                            {users.map((user, idx) => (
+                                <li key={idx}>
+                                    <Text size="medium">
+                                        {user.name} {user.surname} | {user.email} | {user.phone} | {user.role}
+                                    </Text>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <Text size="medium">Нет пользователей</Text>
                     )}
                 </div>
             </Container>

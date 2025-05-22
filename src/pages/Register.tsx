@@ -88,7 +88,7 @@ const Register: React.FC = () => {
             <option value="admin">Админ</option>
           </select>
         </div>
-        <Button size="medium" color="primary" title="Зарегистрироваться" onClick={() => {}} />
+        <Button size="medium" color="primary" title="Зарегистрироваться" type="submit" />
       </form>
     </div>
   );
